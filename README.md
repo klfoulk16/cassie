@@ -4,17 +4,12 @@ Cassie was born out of a desire to do more than just read Designing Data Intensi
 
 ## The Project
 
-### - Memtables using Red Black Trees
-
-### - Log File in Case of Crash
-
-### - Ability to write 
-
-### - A baby SQL-like parser and shell
-
-### - Writing memtable to disk, including sparse index
-
-### - Background Compaction and Merging using Mergesort
+- Memtables using Red Black Trees
+- Log File in Case of Crash
+- A baby SQL-like query language and shell
+- Writing memtable to disk, including sparse index
+- Background Compaction and Merging using Mergesort
+- Tombstones
 
 ## Questions
 
