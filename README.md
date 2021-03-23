@@ -2,14 +2,19 @@
 
 Cassie was born out of a desire to do more than just read Designing Data Intensive Applications, but rather to see it live in code. For most of coding career I've worked with Postgres and SQLite, but never really understood what was going on under the hood. While I know that those two databases use B-trees, the SSTable and LSM-tree model seemed much more intrigueing hence I'll be building my database using that structure. Let's get started!
 
-## The Project
+## Version 1
+
+This project will likely have many iterations as I add more and more layers of complexity. While I have mapped out my goals in /Cassie, I plan to focus on creating an even simpler in-memory hard-coded database in /babyCassie that consists of one table and is able to successfully perform reads/writes/deletions and works with my Cassiequill query language. You must slay the baby dragons before you attempt the real one.
+
+## The Ideal Project
 
 - Memtables using Red Black Trees
 - Log File in Case of Crash
-- A baby SQL-like query language and shell
-- Writing memtable to disk, including sparse index
+- A baby SQL-like query language and REPL
+- Writing memtable to disk, including creation of sparse index and compressing blocks.
 - Background Compaction and Merging using Mergesort
 - Tombstones
+- Creation of multiple tables in the database
 
 ## Questions
 
