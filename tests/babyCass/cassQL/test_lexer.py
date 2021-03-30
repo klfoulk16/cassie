@@ -1,6 +1,6 @@
 import pytest
-from cassiequill.lexer import cassLexer
-from cassiequill.tokens import TokenType
+from babyCass.cassQL.lexer import cassLexer
+from babyCass.cassQL.tokens import TokenType
 
 
 class TestLexer:
@@ -20,11 +20,11 @@ class TestLexer:
         assert lexer.current_segment == lexer.segments[lexer.current_position]
 
     @pytest.mark.parametrize('line, segments', [
-        # ("INSERT INTO table_name (col1, col2, col3) VALUES (val1, val2, val3);",
-        #  ['INSERT', 'INTO', 'table_name', '(', 'col1',
-        #   ',', 'col2', ',', 'col3', ')', 'VALUES', '(',
-        #   'val1', ',', 'val2', ',', 'val3', ')', ';']),
-        ("INSERT", ["INSERT", ])
+        ("INSERT INTO table_name (col1, col2, col3) VALUES (val1, val2, val3);",
+         ['INSERT', 'INTO', 'table_name', '(', 'col1',
+          ',', 'col2', ',', 'col3', ')', 'VALUES', '(',
+          'val1', ',', 'val2', ',', 'val3', ')', ';']),
+        ("INSERT", ["INSERT"])
     ])
     def test_seperate_line(self, line, segments):
         """Make sure seperate line function working - lexer.segments stores the result of said function"""

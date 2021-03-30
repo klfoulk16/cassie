@@ -1,6 +1,7 @@
 import sys
 import re
-from cassiequill.tokens import Token, TokenType
+import babyCass.cassQL.tokens as tokens
+
 
 class cassLexer():
     def __init__(self, line):
@@ -38,23 +39,23 @@ class cassLexer():
         identifier_pattern = re.compile(r"\w+")
         print(f"Current segment: {self.current_segment}")
         if self.current_segment == 'INSERT':
-            token = Token("INSERT", TokenType.INSERT)
+            token = tokens.Token("INSERT", tokens.TokenType.INSERT)
         elif self.current_segment == 'INTO':
-            token = Token("INTO", TokenType.INTO)
+            token = tokens.Token("INTO", tokens.TokenType.INTO)
         elif self.current_segment == 'VALUES':
-            token = Token("VALUES", TokenType.VALUES)
+            token = tokens.Token("VALUES", tokens.TokenType.VALUES)
         elif self.current_segment == ';':
-            token = Token(";", TokenType.SEMICOLON)
+            token = tokens.Token(";", tokens.TokenType.SEMICOLON)
         elif self.current_segment == '(':
-            token = Token("(", TokenType.OPEN_PARENTHESIS)
+            token = tokens.Token("(", tokens.TokenType.OPEN_PARENTHESIS)
         elif self.current_segment == ')':
-            token = Token(")", TokenType.CLOSE_PARENTHESIS)
+            token = tokens.Token(")", tokens.TokenType.CLOSE_PARENTHESIS)
         elif self.current_segment == ',':
-            token = Token(",", TokenType.COMMA)
+            token = tokens.Token(",", tokens.TokenType.COMMA)
         elif self.current_segment.isnumeric():
-            token = Token(self.current_segment, TokenType.NUMBER)
+            token = tokens.Token(self.current_segment, tokens.TokenType.NUMBER)
         elif identifier_pattern.match(self.current_segment):
-            token = Token(self.current_segment, TokenType.IDENTIFIER)
+            token = tokens.Token(self.current_segment, tokens.TokenType.IDENTIFIER)
         # elif self.current_segment is None:
         #     token = Token("EOF", TokenType.EOF)
         # think ^^ is unnecessary now

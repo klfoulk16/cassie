@@ -1,4 +1,6 @@
-from config import TokenType
+import babyCass.cassQL.tokens as tokens
+import sys
+
 
 class cassParser:
     def __init__(self, lexer):
@@ -36,7 +38,7 @@ class cassParser:
         print("PROGRAM")
 
         # Parse all the statements in the program.
-        while not self.check_token(TokenType.END):
+        while not self.check_token(tokens.TokenType.END):
             self.statement()
 
     # One of the following statements...
@@ -44,28 +46,28 @@ class cassParser:
         # Check the first token to see what kind of statement this is.
         
         # "INSERT"
-        if self.check_token(TokenType.INSERT):
+        if self.check_token(tokens.TokenType.INSERT):
             print("STATEMENT-INSERT")
             self.next_token()
-            self.match(TokenType.INTO)
-            self.match(TokenType.IDENTIFIER)    # do I need to specify what type of identifier?
+            self.match(tokens.TokenType.INTO)
+            self.match(tokens.TokenType.IDENTIFIER)    # do I need to specify what type of identifier?
             length = self.column_items()
-            self.match(TokenType.VALUES)
+            self.match(tokens.TokenType.VALUES)
             if length == self.column_items():
-                self.match(TokenType.SEMICOLON)
+                self.match(tokens.TokenType.SEMICOLON)
             else:
                 self.abort("Number of columns doesn't match number of values.")
-
+            # db_operations.insert(table_name, columns, values)
 
     def column_items(self):
         # eventually this should check that column names are valid against the table
         # could return length of self for insert statements to check against values
         print("COLUMN ITEMS")
-        self.match(TokenType.OPEN_PARENTHESIS)
-        self.match(TokenType.IDENTIFIER)
+        self.match(tokens.TokenType.OPEN_PARENTHESIS)
+        self.match(tokens.TokenType.IDENTIFIER)
         col_count = 1
-        while self.check_token(TokenType.COMMA):
-            self.match(TokenType.IDENTIFIER)
+        while self.check_token(tokens.TokenType.COMMA):
+            self.match(tokens.TokenType.IDENTIFIER)
             col_count += 1
-        self.match(TokenType.CLOSE_PARENTHESIS)
+        self.match(tokens.TokenType.CLOSE_PARENTHESIS)
         return col_count
