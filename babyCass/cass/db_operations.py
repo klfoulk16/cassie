@@ -2,4 +2,4 @@
 
 
 def insert(table_name, columns, values):
-    pass
+    print("INSERT CALLED")

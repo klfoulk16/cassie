@@ -35,7 +35,7 @@ class cassLexer():
 
     def get_token(self):
         identifier_pattern = re.compile(r"\w+")
-        print(f"Current segment/peek token: {self.current_segment}")
+        # print(f"Current segment/peek token: {self.current_segment}")
         if self.current_segment is None:
             token = tokens.Token("END", tokens.TokenType.END)
         elif self.current_segment == 'INSERT':

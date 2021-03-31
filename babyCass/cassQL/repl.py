@@ -17,6 +17,7 @@ class cassREPL(cmd.Cmd):
         """"A SQL parser"""
         self.lexer = cassLexer(line)
         self.parser = cassParser(self.lexer)
+        self.parser.program()
 
     def do_greet(self, line):
         print('hello,', line)
@@ -27,7 +28,3 @@ class cassREPL(cmd.Cmd):
 
     def do_bye(self, line):
         return True
-
-
-if __name__ == "__main__":
-    cassREPL().cmdloop()
