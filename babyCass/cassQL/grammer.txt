@@ -1,0 +1,3 @@
+program ::= {statement}
+statement ::= "INSERT" "INTO" identifier column_items "VALUES"  column_items  ";"
+column_items ::= "(" { indentifier ","} indentifier ")"

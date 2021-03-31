@@ -6,6 +6,13 @@ Cassie was born out of a desire to do more than just read Designing Data Intensi
 
 This project will likely have many iterations as I add more and more layers of complexity. While I have mapped out my goals in /Cassie, I plan to focus on creating an even simpler in-memory hard-coded database in /babyCassie that consists of one table and is able to successfully perform reads/writes/deletions and works with my Cassiequill query language. You must slay the baby dragons before you attempt the real one.
 
+### Notes:
+
+#### CassQL Restrictions:
+
+1. -1 and floats are not counted as numeric. In fact floats will be seperated into 3 segments and periods currently aren't recognized.
+2. Commas optional after items for INSERT INTO table (column1, column2,) and values
+
 ## The Ideal Project
 
 - Memtables using Red Black Trees
