@@ -11,7 +11,6 @@ This project will likely have many iterations as I add more and more layers of c
 #### CassQL Restrictions:
 
 1. -1 and floats are not counted as numeric. In fact floats will be seperated into 3 segments and periods currently aren't recognized.
-2. Commas optional after items for INSERT INTO table (column1, column2,) and values
 
 ## The Ideal Project
 
