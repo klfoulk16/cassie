@@ -23,8 +23,6 @@ class cassLexer():
     
     def next_segment(self):
         self.current_position += 1
-        print(self.current_position)
-        print(self.current_segment)
         if self.current_position >= len(self.segments):
             self.current_segment = None
         else:
@@ -37,8 +35,10 @@ class cassLexer():
 
     def get_token(self):
         identifier_pattern = re.compile(r"\w+")
-        print(f"Current segment: {self.current_segment}")
-        if self.current_segment == 'INSERT':
+        print(f"Current segment/peek token: {self.current_segment}")
+        if self.current_segment is None:
+            token = tokens.Token("END", tokens.TokenType.END)
+        elif self.current_segment == 'INSERT':
             token = tokens.Token("INSERT", tokens.TokenType.INSERT)
         elif self.current_segment == 'INTO':
             token = tokens.Token("INTO", tokens.TokenType.INTO)
@@ -56,9 +56,6 @@ class cassLexer():
             token = tokens.Token(self.current_segment, tokens.TokenType.NUMBER)
         elif identifier_pattern.match(self.current_segment):
             token = tokens.Token(self.current_segment, tokens.TokenType.IDENTIFIER)
-        # elif self.current_segment is None:
-        #     token = Token("EOF", TokenType.EOF)
-        # think ^^ is unnecessary now
         else:
             # unknown token!!!
             self.abort(f"Unknown token: {self.current_segment}")

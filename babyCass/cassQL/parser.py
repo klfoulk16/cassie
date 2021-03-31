@@ -1,4 +1,5 @@
 import babyCass.cassQL.tokens as tokens
+import babyCass.cass.db_operations as db_operations
 import sys
 
 
@@ -9,9 +10,7 @@ class cassParser:
         self.current_token = None
         self.peek_token = None
         self.next_token()
-        print("first next")
         self.next_token()
-        print("second next")
 
     def check_token(self, kind):
         return kind == self.current_token.kind
@@ -21,6 +20,7 @@ class cassParser:
 
     def match(self, kind):
         if not self.check_token(kind):
+            print(f"Expected {kind.name}, got {self.current_token.kind.name}")
             self.abort(f"Expected {kind.name}, got {self.current_token.kind.name}")
         self.next_token()
 
@@ -55,9 +55,12 @@ class cassParser:
             self.match(tokens.TokenType.VALUES)
             if length == self.column_items():
                 self.match(tokens.TokenType.SEMICOLON)
+                self.match(tokens.TokenType.END)
             else:
                 self.abort("Number of columns doesn't match number of values.")
-            # db_operations.insert(table_name, columns, values)
+            db_operations.insert('table_name', 'columns', 'values')
+        else:
+            self.abort("Incorrect syntax. Try again.")
 
     def column_items(self):
         # eventually this should check that column names are valid against the table
@@ -67,6 +70,7 @@ class cassParser:
         self.match(tokens.TokenType.IDENTIFIER)
         col_count = 1
         while self.check_token(tokens.TokenType.COMMA):
+            self.next_token()
             self.match(tokens.TokenType.IDENTIFIER)
             col_count += 1
         self.match(tokens.TokenType.CLOSE_PARENTHESIS)

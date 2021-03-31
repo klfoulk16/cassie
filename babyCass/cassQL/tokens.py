@@ -9,7 +9,7 @@ class Token:
 
 # TokenType is our enum for all the types of tokens.
 class TokenType(enum.Enum):
-    EOF = -1
+    END = -1
     # Items.
     IDENTIFIER = 1
     NUMBER = 2
