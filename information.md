@@ -7,3 +7,8 @@ The AVL trees are more balanced compared to Red-Black Trees, but they may cause 
 [Source](https://www.geeksforgeeks.org/red-black-tree-set-1-introduction-2/)
 
 Currently, I plan to focus on setting up my database for easy insertions. Later I may readjust if I decide to be more search-heavy. Hence, Red Black Tree it is. Transaction oriented vs analytics oriented, as this is where LSM trees tend to shine.
+
+- Building a Parser/Lexer
+
+http://web.eecs.utk.edu/~azh/blog/teenytinycompiler2.html
+
