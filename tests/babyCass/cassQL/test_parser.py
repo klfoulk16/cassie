@@ -111,15 +111,15 @@ class TestParser:
         parser.statement()
         insert.assert_called()
     
-    @pytest.mark.parametrize('line, col_count', [
-        ("(col1, col2, col3)", 3),
-        ("(val1, val2, val3)", 3),
-        ("(val1, val2, val3, val4)", 4),
-        ("(val1)", 1)
+    @pytest.mark.parametrize('line, items, col_count', [
+        ("(col1, col2, col3)", ['col1', 'col2', 'col3'], 3),
+        ("(val1, val2, val3)", ['val1', 'val2', 'val3'], 3),
+        ("(val1, val2, val3, val4)", ['val1', 'val2', 'val3', 'val4'], 4),
+        ("(val1)", ['val1'], 1)
     ])
-    def test_column_items_correct(self, line, col_count):
+    def test_column_items_correct(self, line, items, col_count):
         parser = cassParser(cassLexer(line))
-        assert parser.column_items() == col_count
+        assert parser.column_items() == (col_count, items)
 
     @pytest.mark.parametrize('line', [
         ("(val1, val2,)"),

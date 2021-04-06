@@ -58,7 +58,7 @@ class cassParser:
                 self.match(tokens.TokenType.END)
             else:
                 self.abort("Number of columns doesn't match number of values.")
-            db_operations.insert('table_name', columns, values)
+            db_operations.insert('database', 'table_name', columns, values)
         else:
             self.abort("Incorrect syntax. Try again.")
 
