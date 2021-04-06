@@ -38,7 +38,9 @@ class cassParser:
 
         # Parse all the statements in the program.
         while not self.check_token(tokens.TokenType.END):
-            self.statement()
+            data = self.statement()
+            if data:
+                return data
 
     # One of the following statements...
     def statement(self):
@@ -58,7 +60,20 @@ class cassParser:
                 self.match(tokens.TokenType.END)
             else:
                 self.abort("Number of columns doesn't match number of values.")
-            db_operations.insert('database', 'table_name', columns, values)
+            db_operations.insert('database.db', 'table_name', columns, values)
+            return None
+
+        # "SELECT"
+        elif self.check_token(tokens.TokenType.SELECT):
+            print("STATEMENT-SELECT")
+            self.next_token()
+            self.match(tokens.TokenType.STAR)
+            self.match(tokens.TokenType.FROM)
+            self.match(tokens.TokenType.IDENTIFIER)    # do I need to specify what type of identifier?
+            self.match(tokens.TokenType.SEMICOLON)
+            self.match(tokens.TokenType.END)
+            entries = db_operations.select('database.db', 'table_name')
+            return entries
         else:
             self.abort("Incorrect syntax. Try again.")
 
