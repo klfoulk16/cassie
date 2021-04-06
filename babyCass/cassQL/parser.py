@@ -20,7 +20,6 @@ class cassParser:
 
     def match(self, kind):
         if not self.check_token(kind):
-            print(f"Expected {kind.name}, got {self.current_token.kind.name}")
             self.abort(f"Expected {kind.name}, got {self.current_token.kind.name}")
         self.next_token()
 
@@ -51,14 +50,15 @@ class cassParser:
             self.next_token()
             self.match(tokens.TokenType.INTO)
             self.match(tokens.TokenType.IDENTIFIER)    # do I need to specify what type of identifier?
-            length = self.column_items()
+            col_length, columns = self.column_items()
             self.match(tokens.TokenType.VALUES)
-            if length == self.column_items():
+            val_length, values = self.column_items()
+            if val_length == col_length:
                 self.match(tokens.TokenType.SEMICOLON)
                 self.match(tokens.TokenType.END)
             else:
                 self.abort("Number of columns doesn't match number of values.")
-            db_operations.insert('table_name', 'columns', 'values')
+            db_operations.insert('table_name', columns, values)
         else:
             self.abort("Incorrect syntax. Try again.")
 
@@ -67,11 +67,11 @@ class cassParser:
         # could return length of self for insert statements to check against values
         print("COLUMN ITEMS")
         self.match(tokens.TokenType.OPEN_PARENTHESIS)
+        items = [self.current_token.text]
         self.match(tokens.TokenType.IDENTIFIER)
-        col_count = 1
         while self.check_token(tokens.TokenType.COMMA):
             self.next_token()
+            items.append(self.current_token.text)
             self.match(tokens.TokenType.IDENTIFIER)
-            col_count += 1
         self.match(tokens.TokenType.CLOSE_PARENTHESIS)
-        return col_count
+        return len(items), items
