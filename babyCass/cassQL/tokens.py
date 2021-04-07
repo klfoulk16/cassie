@@ -17,9 +17,12 @@ class TokenType(enum.Enum):
     INSERT = 101
     INTO = 102
     VALUES = 103
+    SELECT = 104
+    FROM = 105
     # Operators.
     # Other Characters.
     SEMICOLON = 301
     OPEN_PARENTHESIS = 302
     CLOSE_PARENTHESIS = 303
     COMMA = 304
+    STAR = 305

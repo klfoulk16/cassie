@@ -44,6 +44,10 @@ class cassLexer():
             token = tokens.Token("INTO", tokens.TokenType.INTO)
         elif self.current_segment == 'VALUES':
             token = tokens.Token("VALUES", tokens.TokenType.VALUES)
+        elif self.current_segment == 'SELECT':
+            token = tokens.Token("SELECT", tokens.TokenType.SELECT)
+        elif self.current_segment == 'FROM':
+            token = tokens.Token("FROM", tokens.TokenType.FROM)
         elif self.current_segment == ';':
             token = tokens.Token(";", tokens.TokenType.SEMICOLON)
         elif self.current_segment == '(':
@@ -52,6 +56,8 @@ class cassLexer():
             token = tokens.Token(")", tokens.TokenType.CLOSE_PARENTHESIS)
         elif self.current_segment == ',':
             token = tokens.Token(",", tokens.TokenType.COMMA)
+        elif self.current_segment == '*':
+            token = tokens.Token("*", tokens.TokenType.STAR)
         elif self.current_segment.isnumeric():
             token = tokens.Token(self.current_segment, tokens.TokenType.NUMBER)
         elif identifier_pattern.match(self.current_segment):

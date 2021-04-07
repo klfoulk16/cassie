@@ -17,7 +17,10 @@ class cassREPL(cmd.Cmd):
         """"A SQL parser"""
         self.lexer = cassLexer(line)
         self.parser = cassParser(self.lexer)
-        self.parser.program()
+        data = self.parser.program()
+        if data:
+            for entry in data:
+                print(entry)
 
     def do_greet(self, line):
         print('hello,', line)
